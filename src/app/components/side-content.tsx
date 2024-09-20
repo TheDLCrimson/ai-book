@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import SelectMenu from "./select-menus";
 
 export default function SideContent() {
-  // Step 1: Manage state for form inputs
   const [type, setType] = useState("Multiple Choices");
   const [level, setLevel] = useState("Basic");
   const [knowledgeRange, setKnowledgeRange] = useState("Chapter 1");
   const [numberOfQuestions, setNumberOfQuestions] = useState("5");
 
-  // Step 2: Handle API request
   const handleGenerateQuiz = async () => {
     const requestData = {
       type,
