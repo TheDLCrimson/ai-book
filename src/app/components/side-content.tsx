@@ -15,39 +15,87 @@ export default function SideContent() {
       numberOfQuestions,
     };
 
-    // Print out the request data before sending
     console.log("Request Data:", requestData);
 
-    const fResult = await fetch(
-      "https://api.coze.com/v1/conversation/message/create?conversation_id=7402185067860459527",
-      {
+    const fetchQuizQuestions = async () => {
+      const response = await fetch("https://api.coze.com/v3/chat", {
         method: "POST",
         headers: {
           Authorization:
-            "Bearer pat_XfESlceOmU1Kjf6yhOpfdYKveE8igIJ0hG7cYuCYjYaAuxDSBE3owoScY7ZYyKXE",
+            "Bearer pat_WOmFBGEykcbel1nz9Mzu32jW5UaWx0Rp9LFuNGr3zbrFVgeCI4QmOg2Fkd0ZED5j",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           bot_id: "7402185067860459527",
-          stream: false,
+          user_id: "Crimson",
+          stream: true,
           response_format: "json_object",
-          messages: [
+          additional_messages: [
             {
               role: "user",
-              content: `Give me ${numberOfQuestions} questions for a ${level} level ${type} quiz covering ${knowledgeRange}. Format: {id: number, q: string, a: string, opts: string[]}`,
+              content: `Give me ${numberOfQuestions} questions for a ${level} level ${type} quiz covering ${knowledgeRange}. Format is: {id: number, q: string, a: string, opts: string[]}`,
               content_type: "text",
             },
           ],
         }),
+      });
+
+      return response.text();
+    };
+
+    const parseResponse = (responseText: string) => {
+      const events = responseText.split("\nevent:");
+      let completedMessageCount = 0;
+
+      for (let eventBlock of events) {
+        if (eventBlock.includes("conversation.message.completed")) {
+          completedMessageCount++;
+          if (completedMessageCount === 2) {
+            const jsonData = eventBlock.split("data:")[1].trim();
+            try {
+              const parsedData = JSON.parse(jsonData);
+              if (parsedData.content && parsedData.content_type === "text") {
+                return parsedData.content;
+              }
+            } catch (error) {
+              console.error("Error parsing JSON:", error);
+            }
+          }
+        }
       }
-    );
+    };
 
-    // const fJson = await fResult.json();
-    // console.log(fJson);
+    const parseQuestions = (contentText: string) => {
+      const regex =
+        /\{id:\s*(\d+),\s*q:\s*"([^"]+)",\s*a:\s*"([^"]+)",\s*opts:\s*\[([^\]]+)\]\}/g;
+      const questions = [];
+      let match;
 
-    console.log("Raw response:", fResult);
-    const fJson = await fResult.json();
-    console.log("Parsed response:", fJson);
+      while ((match = regex.exec(contentText)) !== null) {
+        const id = parseInt(match[1]);
+        const question = match[2];
+        const answer = match[3];
+        const options = match[4]
+          .split(",")
+          .map((opt) => opt.trim().replace(/^"|"$/g, ""));
+
+        questions.push({ id, question, answer, options });
+      }
+
+      return questions;
+    };
+
+    try {
+      const rawResponse = await fetchQuizQuestions();
+      console.log("Raw response text:", rawResponse);
+
+      const contentText = parseResponse(rawResponse);
+      const questionsJson = parseQuestions(contentText);
+
+      console.log(JSON.stringify(questionsJson, null, 2));
+    } catch (error) {
+      console.error("Error generating quiz:", error);
+    }
   };
 
   return (
@@ -56,7 +104,7 @@ export default function SideContent() {
         <SelectMenu
           label="Type"
           options={["Multiple Choices", "True or False"]}
-          onChange={(value) => setType(value)} // Capture selected value
+          onChange={(value) => setType(value)}
         />
         <SelectMenu
           label="Level"
@@ -82,7 +130,7 @@ export default function SideContent() {
         />
         <button
           type="button"
-          onClick={handleGenerateQuiz} // Call API when button is clicked
+          onClick={handleGenerateQuiz}
           className="rounded-md m-4 bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Generate Quiz
