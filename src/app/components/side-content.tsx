@@ -43,7 +43,7 @@ export default function SideContent() {
             additional_messages: [
               {
                 role: "user",
-                content: `Give me ${numberOfQuestions} questions for a ${level} level ${type} quiz covering ${knowledgeRange}. Format is: {id: number, q: string, a: string, opts: string[]}`,
+                content: `Give me ${numberOfQuestions} questions for a ${level} level ${type} quiz covering ${knowledgeRange} from the book Linear Algebra and Applications. Format is: {id: number, q: string, a: string, opts: string[]}. Do Not Have Label A, B, C, D in options`,
                 content_type: "text",
               },
             ],
@@ -119,7 +119,7 @@ export default function SideContent() {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 mt-20">
+    <div className="w-full h-full flex justify-center items-center overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 mt-">
       <div className="flex flex-col items-center w-full h-full max-h-screen overflow-y-auto">
         {!isQuizGenerated ? (
           <>
@@ -136,12 +136,15 @@ export default function SideContent() {
             <SelectMenu
               label="Knowledge Range"
               options={[
-                "Chapter 1",
-                "Chapter 2",
-                "Chapter 3",
-                "Chapter 4",
-                "Chapter 5",
-                "Chapter 6",
+                "Chapter 1 - Vectors",
+                "Chapter 2 - Matrices",
+                "Chapter 3 - Linear Equations",
+                "Chapter 4 - Least-Squares",
+                "Chapter 5 - Eigenvalues for Symmetric Matrices",
+                "Chapter 6 - Singular Values",
+                "Chapter 7 - Examples",
+                "Chapter 8 - Applications",
+                "Chapter 9 - Theorems",
               ]}
               onChange={(value) => setKnowledgeRange(value)}
             />
