@@ -31,12 +31,11 @@ export default function SideContent() {
         const response = await fetch("https://api.coze.com/v3/chat", {
           method: "POST",
           headers: {
-            Authorization:
-              "Bearer pat_WOmFBGEykcbel1nz9Mzu32jW5UaWx0Rp9LFuNGr3zbrFVgeCI4QmOg2Fkd0ZED5j",
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            bot_id: "7402185067860459527",
+            bot_id: process.env.NEXT_PUBLIC_BOT_ID,
             user_id: "Crimson",
             stream: true,
             response_format: "json_object",
@@ -120,7 +119,7 @@ export default function SideContent() {
 
   return (
     <div className="w-full h-full flex justify-center items-center overflow-y-auto px-4 py-6 sm:px-6 lg:px-8 mt-">
-      <div className="flex flex-col items-center w-full h-full max-h-screen overflow-y-auto">
+      <div className="flex flex-col items-center w-full h-full max-h-screen overflow-y-auto p-4">
         {!isQuizGenerated ? (
           <>
             <SelectMenu
