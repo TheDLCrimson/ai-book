@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AI-Book: Linear Algebra and Applications
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Understanding Linear Algebra can be challenging for students, requiring both theoretical knowledge and practical application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To address this, AI-Book was developed as an AI-powered learning assistant that enhances engagement through interactive reading and dynamic practice exercises.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This AI-Book application is an **AI-powered learning tool** that uses **Retrieval-Augmented Generation (RAG)** to provide contextual explanations and generate customized quizzes for **Linear Algebra**, enhancing learning and engagement.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This product is ideal for:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Students** looking to improve their grasp of linear algebra concepts.
+- **Professors** seeking a tool to assist in teaching and testing students.
+- **Self-learners** who want an interactive way to study Linear Algebra.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+### AI Chat
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Uses a **Retrieval-Augmented Generation (RAG) AI Agent** to provide insights and explanations directly from the book.
+- Enables users to **ask any content-related questions** about Linear Algebra.
+- Returns responses that help clarify concepts, definitions, and problem-solving approaches.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Dynamic Practice Quizzes
 
-## Deploy on Vercel
+- Automatically **generates multiple-choice and true/false questions** from different book chapters.
+- Offers quizzes at **varying difficulty levels** to accommodate different learning needs.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Future Expansion
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- The long-term vision is to **integrate multiple books** into an AI-powered book-learning platform.
+- Open-sourcing the project allows for **community-driven innovation**, enabling developers to explore new features and enhance the interactive reading experience.
+
+## Tech Stack
+
+- **Frontend:** [Next.js](https://nextjs.org/) + [Tailwind CSS](https://tailwindcss.com/)
+- **AI Agent:** [CozeAI](https://coze.com/) with RAG and fine-tuning
+- **API Integration:** CozeAI API for AI-generated responses and quiz generation
+- **Hosting:** [Vercel](https://vercel.com/)
+- **Platform Requirements:** Works on any modern web browser and standard devices (desktop, tablet, mobile)
+
+## Installation & Setup
+
+**If you wish to clone or contribute, follow these steps:**
+
+### Prerequisites
+
+- Ensure you have [Node.js](https://nodejs.org/) installed.
+- Install [Git](https://git-scm.com/) for version control.
+
+### Steps
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/TheDLCrimson/ai-book.git
+   cd ai-book
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the development server:
+   ```sh
+   npm run dev
+   ```
+4. Open the application in your browser at `http://localhost:3000`
+
+### Deployment (Vercel)
+
+This app is optimized for **Vercel** deployment:
+
+1. Create a [Vercel account](https://vercel.com/).
+2. Install the Vercel CLI:
+   ```sh
+   npm install -g vercel
+   ```
+3. Deploy the app:
+   ```sh
+   vercel
+   ```
+
+## Contributions
+
+We welcome contributions to enhance AI-Book's features! To contribute:
+
+- Open an **issue** on GitHub to discuss a feature or a bug fix.
+- Submit **pull requests** with detailed explanations.
+- For inquiries, contact me via [email](thedlcrimson22@gmail.com).
+
+## Check Out My MVP
+
+Curious about how AI-Book works? Check out the [live demo](https://ai-book-linear-algebra-and-applications.vercel.app/) to see AI-powered learning in action!
+
+## License
+
+This project is licensed under the **MIT License**. See the LICENSE file for details.
+
+## 📢 Acknowledgments
+
+- **NaviAI**: [https://naviai.io.vn/](https://naviai.io.vn/) – Original AI provider and collaborator.
+- **Professor [Laurent El Ghaoui](https://vinuni.edu.vn/people/laurent-el-ghaoui-phd-2/)**: Author of _Linear Algebra and Applications_.
+
+---
+
+_**Side Note**: Originally developed as a private project between NaviAI and Professor Laurent El Ghaoui, AI-Book was intended as a B2C (Business-to-Consumer) educational tool. However, due to unforeseen circumstances, the deal was not finalized. As a result, part of the project is now open to the public, offering an opportunity for contributors to expand its potential into a broader AI-powered book-learning platform._
