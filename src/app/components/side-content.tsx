@@ -42,7 +42,7 @@ export default function SideContent() {
             additional_messages: [
               {
                 role: "user",
-                content: `Give me ${numberOfQuestions} questions for a ${level} level ${type} quiz covering ${knowledgeRange} from the book Linear Algebra and Applications. Format is: {id: number, q: string, a: string, opts: string[]}. There are 1 correct answer and 3 incorrect options, and they Do Not Have Label A, B, C, D in options. Also prefer questions that does not have latex equations or matrices, if yes then write it as text.`,
+                content: `Give me ${numberOfQuestions} questions for a ${level} level ${type} quiz covering ${knowledgeRange} from the book Linear Algebra and Applications. Format is: {id: number, q: string, a: string, opts: string[]} (Meaning 1 answer and 3 options). Do Not Have Label A, B, C, D in options. Also prefer questions that does not have latex equations or matrices, if yes then write it as text.`,
                 content_type: "text",
               },
             ],
